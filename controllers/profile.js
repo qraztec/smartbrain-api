@@ -1,4 +1,4 @@
-const profileHandler = (req, res, db) => {
+const handleProfileGet = (req, res, db) => {
     const {id} = req.params;
     let found = false;
     db.select('*').from('users').where( {
@@ -12,5 +12,6 @@ const profileHandler = (req, res, db) => {
     })
     .catch(err => res.status(400).json('Not found'))
 }
-
-export default profileHandler;
+module.exports = (
+    handleProfileGet
+)

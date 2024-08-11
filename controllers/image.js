@@ -1,6 +1,6 @@
 
 
-const imageHandler = (req, res, db) => {
+const handleImage = (req, res, db) => {
     const {id} = req.body;
     db('users').where('id', '=', id).increment('entries', 1).
     returning('entries')
@@ -9,4 +9,6 @@ const imageHandler = (req, res, db) => {
     }).catch(err => res.status(400).json('unable to get entries'));
 }
 
-export default imageHandler;
+module.exports = {
+    handleImage
+}
