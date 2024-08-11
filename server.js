@@ -15,10 +15,11 @@ const db = require('knex')({
 // db.select('*').from('users').then(data => {
 //     console.log(data);
 // });
-const register = require('./controllers/register');
-const signin = require('./controllers/signin');
-const profile = require('./controllers/profile');
-const image = require('./controllers/image');
+
+import registerHandler from "./controllers/register.js";
+import signinHandler from "./controllers/signin.js";
+import profileHandler from "./controllers/profile.js";
+import imageHandler from "./controllers/image.js";
 
 const app = express();
 app.use(express.json());
@@ -29,13 +30,13 @@ app.get('/', (req, res) => {
     res.send('success');
 })
 
-app.post('/signin', (req, res) => {signin.handleSignin(req, res, db, bcrypt)})
+app.post('/signin', (req, res) => {signinHandler(req, res, db, bcrypt)})
 
-app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)})
+app.post('/register', (req, res) => {registerHandler(req, res, db, bcrypt)})
 
-app.get('/profile/:id', (req, res) => {profile.handleProfileGet(req, res, db)})
+app.get('/profile/:id', (req, res) => {profileHandler(req, res, db)})
 
-app.put('/image', (req, res) => {image.handleImage(req, res, db)})
+app.put('/image', (req, res) => {imageHandler(req, res, db)})
 
 // bcrypt.hash("bacon", null, null, function(err, hash) {
 //     // Store hash in your password DB.
